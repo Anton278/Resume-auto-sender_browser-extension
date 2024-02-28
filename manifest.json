@@ -8,7 +8,7 @@
   },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["openJobBoards.js"],
       "matches": ["https://social-network-anton278.vercel.app/*"]
     }
   ],

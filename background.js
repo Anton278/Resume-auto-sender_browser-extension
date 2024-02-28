@@ -1,19 +1,16 @@
-"use strict";
-
-async function getTabsToOpen() {
-  const tabsToOpen = [
+async function getJobBoardsToOpen() {
+  const jobBoardsToOpen = [
     "https://djinni.co/jobs/?primary_keyword=JavaScript&exp_level=no_exp&exp_level=1y&exp_level=2y",
   ];
 
   const tabs = await chrome.tabs.query({});
-  tabsToOpen.filter((tabToOpen) => {
-    const tab = tabs.find((tab) => tab.url === tabToOpen);
+
+  jobBoardsToOpen.filter((jobBoardToOpen) => {
+    const tab = tabs.find((tab) => tab.url === jobBoardToOpen);
     return tab;
   });
 
-  console.log("tabs to open: ", tabsToOpen);
-
-  return tabsToOpen;
+  return jobBoardsToOpen;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -24,10 +21,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   );
 
   switch (request.eventName) {
-    case "get-tabs-to-open":
+    case "get-job-boards-to-open":
       (async () => {
-        const tabsToOpen = await getTabsToOpen();
-        sendResponse(tabsToOpen);
+        const jobBoardsToOpen = await getJobBoardsToOpen();
+        sendResponse(jobBoardsToOpen);
       })();
   }
 
