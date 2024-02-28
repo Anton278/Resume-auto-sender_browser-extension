@@ -5,12 +5,10 @@ async function getJobBoardsToOpen() {
 
   const tabs = await chrome.tabs.query({});
 
-  jobBoardsToOpen.filter((jobBoardToOpen) => {
+  return jobBoardsToOpen.filter((jobBoardToOpen) => {
     const tab = tabs.find((tab) => tab.url === jobBoardToOpen);
-    return tab;
+    return !tab;
   });
-
-  return jobBoardsToOpen;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
