@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "Auto resume sender",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["https://social-network-anton278.vercel.app/*"]
+    }
+  ],
+  "permissions": ["tabs"]
+}
