@@ -23,6 +23,10 @@
       "exclude_matches": [
         "https://djinni.co/jobs/?primary_keyword=JavaScript&exp_level=no_exp&exp_level=1y&exp_level=2y"
       ]
+    },
+    {
+      "js": ["djinni-apply-succeded.js"],
+      "matches": ["https://djinni.co/jobs/*?applied=ok"]
     }
   ],
   "permissions": ["tabs"]

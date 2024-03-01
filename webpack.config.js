@@ -2,10 +2,10 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    djinni: "./djinni-apply.js",
+    "djinni-apply": "./djinni-apply.js",
+    "djinni-apply-succeded": "./djinni-apply-succeded.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "djinni-apply.js",
   },
 };
