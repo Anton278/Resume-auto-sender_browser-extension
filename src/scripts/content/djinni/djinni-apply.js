@@ -1,9 +1,9 @@
-import applicationsService from "./src/services/applications";
-import unreachableVacanciesService from "./src/services/unreachableVacancies";
+import applicationsService from "../../../services/applications";
+import unreachableVacanciesService from "../../../services/unreachableVacancies";
 import {
   applicationStatuses,
   unreachableVacancyReasons,
-} from "./src/utils/const";
+} from "../../../utils/const";
 
 window.onload = async () => {
   console.log("djinni-apply.js");
@@ -59,5 +59,5 @@ window.onload = async () => {
   } catch (err) {
     console.log(err);
   }
-  submitBtn.click();
+  // submitBtn.click();
 };

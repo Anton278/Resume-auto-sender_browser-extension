@@ -1,5 +1,5 @@
-import applicationsService from "./src/services/applications";
-import { applicationStatuses } from "./src/utils/const";
+import applicationsService from "../../../services/applications";
+import { applicationStatuses } from "../../../utils/const";
 
 console.log("djinni-apply-succeded.js");
 
