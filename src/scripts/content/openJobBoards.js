@@ -7,4 +7,10 @@ async function openJobBoards() {
   );
 }
 
+// const pagination = document.querySelector(
+//   "ul.pagination.pagination_with_numbers"
+// );
+// // children.length minus previous and next page buttons
+// const pagesCount = pagination.children.length - 2;
+
 openJobBoards();

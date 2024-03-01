@@ -11,3 +11,4 @@ try {
     status: applicationStatuses.success,
   });
 } catch (err) {}
+window.close();

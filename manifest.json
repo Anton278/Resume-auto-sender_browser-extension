@@ -8,21 +8,16 @@
   },
   "content_scripts": [
     {
+      "js": ["djinni1.js"],
+      "matches": ["https://djinni.co/my/dashboard/"]
+    },
+    {
       "js": ["openJobBoards.js"],
       "matches": ["https://social-network-anton278.vercel.app/*"]
     },
     {
-      "js": ["djinni.js"],
-      "matches": [
-        "https://djinni.co/jobs/?primary_keyword=JavaScript&exp_level=no_exp&exp_level=1y&exp_level=2y"
-      ]
-    },
-    {
       "js": ["djinni-apply.js"],
-      "matches": ["https://djinni.co/jobs/*"],
-      "exclude_matches": [
-        "https://djinni.co/jobs/?primary_keyword=JavaScript&exp_level=no_exp&exp_level=1y&exp_level=2y"
-      ]
+      "matches": ["https://djinni.co/jobs/*"]
     },
     {
       "js": ["djinni-apply-succeded.js"],

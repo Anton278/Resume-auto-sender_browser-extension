@@ -21,8 +21,10 @@ window.onload = async () => {
         url: window.location.href,
         reason: unreachableVacancyReasons.requirements,
       });
-    } catch (err) {}
-    return;
+    } catch (err) {
+    } finally {
+      return window.close();
+    }
   }
 
   const openSubmitFormBtn = document.querySelector(
@@ -33,7 +35,10 @@ window.onload = async () => {
   const requiredInput = document.querySelector(
     "form.js-inbox-reply-form input[required]"
   );
-  if (requiredInput) {
+  const requiredTextarea = document.querySelector(
+    "form.js-inbox-reply-form textarea[required]"
+  );
+  if (requiredInput || requiredTextarea) {
     try {
       await unreachableVacanciesService.create({
         jobBoard: "djinni",
@@ -42,13 +47,14 @@ window.onload = async () => {
         url: window.location.href,
         reason: unreachableVacancyReasons.requiredInput,
       });
-    } catch (err) {}
-    return;
+    } catch (err) {
+    } finally {
+      return window.close();
+    }
   }
 
   const submitBtn = document.querySelector("button#job_apply");
   try {
-    console.log("before create application");
     await applicationsService.create({
       jobBoard: "djinni",
       jobTitle,
@@ -59,5 +65,5 @@ window.onload = async () => {
   } catch (err) {
     console.log(err);
   }
-  // submitBtn.click();
+  submitBtn.click();
 };
