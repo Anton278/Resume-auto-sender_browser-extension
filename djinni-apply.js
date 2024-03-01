@@ -1,48 +1,25 @@
-"use strict";
+import unreachableVacanciesService from "./src/services/unreachableVacancies";
 
-async function getCV() {
-  try {
-    const CVUrl =
-      "https://drive.google.com/file/d/1_OdEkGkpEwOApD62WpH6etAsuD_FJ1Rh/view?usp=drive_link";
-    const res = await fetch(CVUrl);
-    const blob = await res.blob();
-    const cv = new File([blob], "Nakonechnyi_A_CV.pdf", {
-      type: "application/pdf",
-    });
-    return cv;
-  } catch (err) {}
-}
-
-window.onload = () => {
+window.onload = async () => {
   console.log("djinni-apply.js");
 
-  const submitBtn = document.querySelector(
-    "button.btn-primary.js-inbox-toggle-reply-form"
-  );
-  submitBtn.click();
+  const jobTitle = document.querySelector("h1").innerText;
+  const companyName = document.querySelector("a.job-details--title").innerText;
 
-  const addCvAnchor = document.querySelector("#cv_select + a");
-  addCvAnchor.click();
+  const disallowedSubmit = document.querySelector(".alert.alert-warning");
+  if (disallowedSubmit) {
+    try {
+      await unreachableVacanciesService.create({
+        jobBoard: "djinni",
+        jobTitle,
+        companyName,
+        url: window.location.href,
+        reason: "Block from djinni: does not match the requirements",
+      });
+    } catch (err) {}
+    return;
+  }
 
-  const CVInputIntervalId = setInterval(async () => {
-    const CVInput = document.querySelector("#cv_file_input");
-
-    if (!CVInput) {
-      return;
-    }
-
-    const cv = await getCV();
-
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(cv);
-
-    CVInput.files = dataTransfer.files;
-
-    const submitBtn = document.querySelector("button#job_apply");
-    submitBtn?.click();
-
-    console.log("interval");
-
-    clearInterval(CVInputIntervalId);
-  }, 400);
+  const submitBtn = document.querySelector("button#job_apply");
+  // submitBtn.click();
 };
