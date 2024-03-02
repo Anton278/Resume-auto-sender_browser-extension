@@ -73,4 +73,36 @@ window.onload = async () => {
   } catch (err) {
     console.log(err);
   }
+
+  setInterval(async () => {
+    console.log("interval");
+    try {
+      const parser = new DOMParser();
+      const vacanciesFirstPageUrl =
+        "https://djinni.co/jobs/?primary_keyword=JavaScript&exp_level=no_exp&exp_level=1y&exp_level=2y";
+      let vacanciesFirstPage = await axios.get(vacanciesFirstPageUrl);
+      vacanciesFirstPage = parser.parseFromString(
+        vacanciesFirstPage.data,
+        "text/html"
+      );
+      let vacancies = parseVacancies(vacanciesFirstPage);
+      vacancies = vacancies.filter((vacancy) => !vacancy.isApplicationSent);
+
+      let unreachableVacancies = await unreachableVacanciesService.getAll();
+      unreachableVacancies = unreachableVacancies.filter(
+        (unreachableVacancy) => unreachableVacancy.jobBoard === "djinni"
+      );
+
+      // clear from unreachable
+      vacancies = vacancies.filter(
+        (vacancy) =>
+          !unreachableVacancies.find(
+            (unreachableVacancy) => unreachableVacancy.url === vacancy.url
+          )
+      );
+      vacancies.forEach((vacancy) => window.open(vacancy.url, "_blank"));
+    } catch (err) {
+      console.log(err);
+    }
+  }, 1000 * 60);
 };
