@@ -8,8 +8,6 @@ import {
 window.onload = async () => {
   console.log("djinni-apply.js");
 
-  return;
-
   const jobTitle = document.querySelector("h1").innerText;
   const companyName = document.querySelector("a.job-details--title").innerText;
 

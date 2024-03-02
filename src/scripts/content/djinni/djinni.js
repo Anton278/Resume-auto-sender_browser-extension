@@ -20,8 +20,6 @@ function parseVacancies(document) {
 window.onload = async () => {
   console.log("djinni1.js");
 
-  return;
-
   const parser = new DOMParser();
 
   try {
