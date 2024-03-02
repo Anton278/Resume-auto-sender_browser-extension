@@ -13,4 +13,4 @@ async function openJobBoards() {
 // // children.length minus previous and next page buttons
 // const pagesCount = pagination.children.length - 2;
 
-openJobBoards();
+// openJobBoards();

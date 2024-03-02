@@ -1,13 +1,21 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
     djinni: "./src/scripts/content/djinni/djinni.js",
-    djinni1: "./src/scripts/content/djinni/djinni1.js",
     "djinni-apply": "./src/scripts/content/djinni/djinni-apply.js",
     "djinni-apply-succeded":
       "./src/scripts/content/djinni/djinni-apply-succeded.js",
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "manifest.json" },
+        { from: "./src/scripts/background/background.js" },
+      ],
+    }),
+  ],
   output: {
     path: path.resolve(__dirname, "dist"),
   },
