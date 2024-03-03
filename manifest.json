@@ -20,5 +20,11 @@
       "matches": ["https://djinni.co/jobs/*/?applied=ok"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["worker.js"],
+      "matches": ["https://djinni.co/*"]
+    }
+  ],
   "permissions": ["tabs"]
 }

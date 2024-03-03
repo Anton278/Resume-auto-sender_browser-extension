@@ -13,6 +13,7 @@ module.exports = {
       patterns: [
         { from: "manifest.json" },
         { from: "./src/scripts/background/background.js" },
+        { from: "./src/scripts/content/djinni/worker.js" },
       ],
     }),
   ],

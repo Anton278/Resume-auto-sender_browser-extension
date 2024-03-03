@@ -2,6 +2,16 @@ import axios from "axios";
 
 import unreachableVacanciesService from "../../../services/unreachableVacancies";
 
+async function getWorkerBlob() {
+  try {
+    const url = await chrome.runtime.getURL("worker.js");
+
+    const res = await fetch(url);
+    const blob = await res.blob();
+    return blob;
+  } catch (err) {}
+}
+
 function parseVacancies(document) {
   const vacancies = [];
 
@@ -74,8 +84,11 @@ window.onload = async () => {
     console.log(err);
   }
 
-  setInterval(async () => {
-    console.log("interval");
+  const workerBlob = await getWorkerBlob();
+
+  const worker = new Worker(URL.createObjectURL(workerBlob));
+
+  worker.onmessage = async (e) => {
     try {
       const parser = new DOMParser();
       const vacanciesFirstPageUrl =
@@ -104,5 +117,5 @@ window.onload = async () => {
     } catch (err) {
       console.log(err);
     }
-  }, 1000 * 60);
+  };
 };
