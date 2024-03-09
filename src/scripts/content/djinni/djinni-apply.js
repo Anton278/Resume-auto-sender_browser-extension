@@ -10,6 +10,9 @@ window.onload = async () => {
 
   const jobTitle = document.querySelector("h1").innerText;
   const companyName = document.querySelector("a.job-details--title").innerText;
+  const applicationsCount = document
+    .querySelector("span.bi.bi-people-fill")
+    .nextSibling.textContent.replaceAll(/\D/g, "");
 
   const disallowedSubmit = document.querySelector(
     "span.bi.bi-x-circle.text-danger"
@@ -48,6 +51,7 @@ window.onload = async () => {
         companyName,
         url: window.location.href,
         reason: unreachableVacancyReasons.requiredInput,
+        applicationsCount,
       });
     } catch (err) {
     } finally {
@@ -64,6 +68,7 @@ window.onload = async () => {
         companyName,
         url: window.location.href,
         status: applicationStatuses.submitted,
+        applicationsCount,
       });
       submitBtn.click();
     } catch (err) {
