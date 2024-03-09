@@ -11,7 +11,9 @@ window.onload = async () => {
   const jobTitle = document.querySelector("h1").innerText;
   const companyName = document.querySelector("a.job-details--title").innerText;
 
-  const disallowedSubmit = document.querySelector(".alert.alert-warning");
+  const disallowedSubmit = document.querySelector(
+    "span.bi.bi-x-circle.text-danger"
+  );
   if (disallowedSubmit) {
     try {
       await unreachableVacanciesService.create({
@@ -54,16 +56,20 @@ window.onload = async () => {
   }
 
   const submitBtn = document.querySelector("button#job_apply");
-  try {
-    await applicationsService.create({
-      jobBoard: "djinni",
-      jobTitle,
-      companyName,
-      url: window.location.href,
-      status: applicationStatuses.submitted,
-    });
-  } catch (err) {
-    console.log(err);
+  if (submitBtn) {
+    try {
+      await applicationsService.create({
+        jobBoard: "djinni",
+        jobTitle,
+        companyName,
+        url: window.location.href,
+        status: applicationStatuses.submitted,
+      });
+      submitBtn.click();
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    window.close();
   }
-  submitBtn.click();
 };
